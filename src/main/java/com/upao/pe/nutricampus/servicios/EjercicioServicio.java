@@ -51,4 +51,12 @@ public class EjercicioServicio {
     public EjercicioSerializer retornarEjercicioSerializer(Ejercicio ejercicio){
         return new EjercicioSerializer(ejercicio.getNombre(), ejercicio.getDescripcion(), ejercicio.getTiempoEjercicio(), ejercicio.getCaloriasQuemadas(), ejercicio.getVelocidadEjercicio());
     }
+
+    public Ejercicio buscarEjercicio(String nombre){
+        Optional<Ejercicio> ejercicio = ejercicioRepositorio.findByNombre(nombre);
+        if(ejercicio.isEmpty()){
+            throw new RuntimeException("Ejercicio no encontrado");
+        }
+        return ejercicio.get();
+    }
 }

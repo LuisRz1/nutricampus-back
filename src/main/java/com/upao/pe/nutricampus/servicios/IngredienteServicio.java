@@ -51,4 +51,12 @@ public class IngredienteServicio {
         return new IngredienteSerializer(ingrediente.getNombre(), ingrediente.getCantidad(), ingrediente.getUnidad(), ingrediente.getCaloriasUnidad());
     }
 
+    public Ingrediente buscarIngrediente(String nombre){
+        Optional<Ingrediente> ingrediente = ingredienteRepositorio.findByNombre(nombre);
+        if(ingrediente.isEmpty()){
+            throw new RuntimeException("No existe el ingrediente");
+        }
+        return ingrediente.get();
+    }
+
 }
