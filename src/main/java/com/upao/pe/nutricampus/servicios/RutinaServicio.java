@@ -23,7 +23,7 @@ public class RutinaServicio {
     // CREATE
     public RutinaSerializer crearRutina(CrearRutinaRequest request){
         Ejercicio ejercicio = ejercicioServicio.buscarEjercicio(request.getNombreEjercicio());
-        Rutina rutina = new Rutina(null, request.getRepeticiones(), request.getTiempo(), request.getCaloriasQuemadasTotales(), ejercicio);
+        Rutina rutina = new Rutina(null, request.getRepeticiones(), request.getTiempo(), ejercicio);
         return retornarRutinaSerializer(rutinaRepositorio.save(rutina));
     }
 
@@ -33,7 +33,6 @@ public class RutinaServicio {
         Ejercicio ejercicio = ejercicioServicio.buscarEjercicio(request.getNombreEjercicio());
         rutina.setRepeticiones(request.getRepeticiones());
         rutina.setTiempo(request.getTiempo());
-        rutina.setCaloriasQuemadasTotales(request.getCaloriasQuemadasTotales());
         rutina.setEjercicio(ejercicio);
         rutinaRepositorio.saveAndFlush(rutina);
         return retornarRutinaSerializer(rutina);
@@ -48,7 +47,7 @@ public class RutinaServicio {
 
     // Mapear a serializer
     public RutinaSerializer retornarRutinaSerializer(Rutina rutina){
-        return new RutinaSerializer(rutina.getRepeticiones(), rutina.getTiempo(), rutina.getCaloriasQuemadasTotales(), ejercicioServicio.retornarEjercicioSerializer(rutina.getEjercicio()));
+        return new RutinaSerializer(rutina.getRepeticiones(), rutina.getTiempo(), ejercicioServicio.retornarEjercicioSerializer(rutina.getEjercicio()));
     }
 
     public Rutina buscarRutina(Long id){

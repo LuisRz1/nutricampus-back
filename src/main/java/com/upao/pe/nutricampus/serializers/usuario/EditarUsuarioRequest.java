@@ -14,4 +14,5 @@ public class EditarUsuarioRequest {
     private char nivelActividad;
     private double meta;
     private char velocidadEjercicio;
+    private boolean activo;
 }

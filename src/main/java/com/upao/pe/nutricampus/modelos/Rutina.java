@@ -19,10 +19,8 @@ public class Rutina {
     private Long idRutina;
     @Column(name = "repeticiones", nullable = false)
     private int repeticiones;
-    @Column(name = "tiempo")
+    @Column(name = "tiempo", nullable = false)
     private LocalTime tiempo;
-    @Column(name = "calorias_quemadas_totales", nullable = false)
-    private double caloriasQuemadasTotales;
     @JoinColumns({
             @JoinColumn(name = "id_ejercicio", referencedColumnName = "id_ejercicio", nullable = false)
     })

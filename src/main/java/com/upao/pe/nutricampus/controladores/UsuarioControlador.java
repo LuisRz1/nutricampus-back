@@ -22,11 +22,6 @@ public class UsuarioControlador {
         return usuarioServicio.listarUsuarios();
     }
 
-    @PostMapping("/crear/")
-    public UsuarioSerializer crearUsuario(@RequestBody CrearUsuarioRequest request){
-        return usuarioServicio.crearUsuario(request);
-    }
-
     @PutMapping("/editar/")
     public UsuarioSerializer editarUsuario(@RequestBody EditarUsuarioRequest request){
         return usuarioServicio.editarUsuario(request);

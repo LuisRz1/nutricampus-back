@@ -12,6 +12,5 @@ public class EditarRutinaRequest {
     private Long idRutina;
     private int repeticiones;
     private LocalTime tiempo;
-    private double caloriasQuemadasTotales;
     private String nombreEjercicio;
 }

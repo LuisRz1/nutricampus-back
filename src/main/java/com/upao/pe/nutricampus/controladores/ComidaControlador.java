@@ -15,7 +15,7 @@ import java.util.List;
 public class ComidaControlador {
     @Autowired private ComidaServicio comidaServicio;
 
-    @GetMapping("/listar")
+    @GetMapping("/listar/")
     public List<ComidaSerializer> listarComidas(){
         return comidaServicio.listarComidas();
     }

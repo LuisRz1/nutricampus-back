@@ -11,6 +11,5 @@ import java.time.LocalTime;
 public class RutinaSerializer {
     private int repeticiones;
     private LocalTime tiempo;
-    private double caloriasQuemadasTotales;
     private EjercicioSerializer ejercicio;
 }

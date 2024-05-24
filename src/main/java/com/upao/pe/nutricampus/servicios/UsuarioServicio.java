@@ -1,5 +1,6 @@
 package com.upao.pe.nutricampus.servicios;
 
+import com.upao.pe.nutricampus.excepciones.RecursoExistenteExcepcion;
 import com.upao.pe.nutricampus.modelos.Usuario;
 import com.upao.pe.nutricampus.repositorios.UsuarioRepositorio;
 import com.upao.pe.nutricampus.serializers.usuario.CrearUsuarioRequest;
@@ -16,29 +17,33 @@ public class UsuarioServicio {
     @Autowired private UsuarioRepositorio usuarioRepositorio;
 
     // READ
-    public List<UsuarioSerializer> listarUsuarios(){return usuarioRepositorio.findAll().stream().map((it) -> retornarUsuarioSerializer(it)).toList();}
+    public List<UsuarioSerializer> listarUsuarios(){return usuarioRepositorio.findAll().stream().map(this::retornarUsuarioSerializer).toList();}
 
     // CREATE
-    public UsuarioSerializer crearUsuario(CrearUsuarioRequest request){
+    public Usuario crearUsuario(CrearUsuarioRequest request){
         Usuario usuario = new Usuario(null, request.getNombreUsuario(), request.getCorreo(), request.getContra(), request.getEdad(), request.getPeso(), request.getTalla(), request.getGenero(), request.getNivelActividad(), request.getMeta(), request.getVelocidadEjercicio());
-        return retornarUsuarioSerializer(usuarioRepositorio.save(usuario));
+        if(usuarioRepositorio.existsUsuarioByNombreUsuario(usuario.getNombreUsuario())){
+            throw new RecursoExistenteExcepcion("El usuario "+usuario.getNombreUsuario()+" existe");
+        }
+        if(usuarioRepositorio.existsUsuarioByCorreo(usuario.getCorreo())){
+            throw new RecursoExistenteExcepcion("El email ya ha sido usado para la creación de otro usuario");
+        }
+        return usuarioRepositorio.save(usuario);
     }
 
     // UPDATE
     public UsuarioSerializer editarUsuario(EditarUsuarioRequest request){
-        Optional<Usuario> usuario = usuarioRepositorio.findByNombreUsuario(request.getNombreUsuario());
-        if(usuario.isEmpty()){
-            throw new RuntimeException("Usuario no encontrado");
-        }
-        usuario.get().setContra(request.getContra());
-        usuario.get().setPeso(request.getPeso());
-        usuario.get().setTalla(request.getTalla());
-        usuario.get().setGenero(request.getGenero());
-        usuario.get().setNivelActividad(request.getNivelActividad());
-        usuario.get().setMeta(request.getMeta());
-        usuario.get().setVelocidadEjercicio(request.getVelocidadEjercicio());
-        usuarioRepositorio.saveAndFlush(usuario.get());
-        return retornarUsuarioSerializer(usuario.get());
+        Usuario usuario = buscarPorNombreUsuario(request.getNombreUsuario());
+        usuario.setContra(request.getContra());
+        usuario.setPeso(request.getPeso());
+        usuario.setTalla(request.getTalla());
+        usuario.setGenero(request.getGenero());
+        usuario.setNivelActividad(request.getNivelActividad());
+        usuario.setMeta(request.getMeta());
+        usuario.setVelocidadEjercicio(request.getVelocidadEjercicio());
+        usuario.setActivo(request.isActivo());
+        usuarioRepositorio.saveAndFlush(usuario);
+        return retornarUsuarioSerializer(usuario);
     }
 
     // DELETE
@@ -56,4 +61,12 @@ public class UsuarioServicio {
         return new UsuarioSerializer(usuario.getNombreUsuario(), usuario.getEdad(), usuario.getPeso(), usuario.getTalla(), usuario.getGenero(), usuario.getNivelActividad(), usuario.getMeta(), usuario.getVelocidadEjercicio());
     }
 
+    // Buscar por nombre de usuario
+    public Usuario buscarPorNombreUsuario(String nombreUsuario){
+        Optional<Usuario> usuario = usuarioRepositorio.findByNombreUsuario(nombreUsuario);
+        if(usuario.isEmpty()){
+            throw new RuntimeException("Usuario no encontrado");
+        }
+        return usuario.get();
+    }
 }
