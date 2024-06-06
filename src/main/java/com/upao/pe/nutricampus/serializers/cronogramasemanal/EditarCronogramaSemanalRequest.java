@@ -14,4 +14,5 @@ public class EditarCronogramaSemanalRequest {
     private String dia;
     private boolean completado;
     private Long idRutina;
+    private Long idHoraDieta;
 }

@@ -1,12 +1,15 @@
 package com.upao.pe.nutricampus.serializers.dieta;
 
-import com.upao.pe.nutricampus.serializers.comida.ComidaSerializer;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class CrearDietaRequest {
+public class Dieta {
+    private Long idDieta;
     private int raciones;
-    private String nombreComida;
+    private Long idComida;
 }

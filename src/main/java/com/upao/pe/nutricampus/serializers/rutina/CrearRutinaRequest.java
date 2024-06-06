@@ -1,6 +1,5 @@
 package com.upao.pe.nutricampus.serializers.rutina;
 
-import com.upao.pe.nutricampus.serializers.ejercicio.EjercicioSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

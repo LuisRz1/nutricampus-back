@@ -17,19 +17,16 @@ public class CronogramaSemanal {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_cronograma_semanal")
     private Long idCronogramaSemanal;
-    @Column(name = "fecha_inicio")
+    @Column(name = "fecha_inicio", nullable = false)
     private LocalDate fechaInicio;
-    @Column(name = "fecha_fin")
+    @Column(name = "fecha_fin", nullable = false)
     private LocalDate fechaFin;
-    @Column(name = "dia")
+    @Column(name = "dia", nullable = false)
     private String dia;
-    @Column(name = "completado")
+    @Column(name = "completado", nullable = false)
     private boolean completado;
-    @JoinColumns({
-            @JoinColumn(name="id_hora_dieta", referencedColumnName="id_hora_dieta")
-    })
-    @ManyToOne
-    HoraDieta horaDieta;
+    @Column(name = "id_hora_dieta", nullable = false)
+    private Long idHoraDieta;
     @JoinColumns({
             @JoinColumn(name="id_rutina", referencedColumnName="id_rutina")
     })
