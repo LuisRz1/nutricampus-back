@@ -33,7 +33,6 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("io.jsonwebtoken:jjwt:0.9.1")
 	implementation("javax.xml.bind:jaxb-api:2.3.0")
-	implementation("io.github.flashvayne:chatgpt-spring-boot-starter:1.0.5")
 	compileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")
