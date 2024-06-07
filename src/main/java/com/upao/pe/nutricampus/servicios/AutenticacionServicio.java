@@ -8,6 +8,7 @@ import com.upao.pe.nutricampus.modelos.Usuario;
 import com.upao.pe.nutricampus.serializers.usuario.*;
 import com.upao.pe.nutricampus.util.EncryptionUtil;
 import com.upao.pe.nutricampus.util.JwtTokenUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -86,5 +87,11 @@ public class AutenticacionServicio {
             throw new UsuarioNoActivadoExcepcion("Cuenta no activada");
         }
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Usuario y/o password incorrectos");
+    }
+
+    public String obtenerNombreUsuario(ObtenerUsuarioRequest request){
+        String jwtToken = request.getToken();
+        String token = EncryptionUtil.decrypt(jwtToken);
+        return jwtTokenUtil.getUserNameFromToken(token);
     }
 }
