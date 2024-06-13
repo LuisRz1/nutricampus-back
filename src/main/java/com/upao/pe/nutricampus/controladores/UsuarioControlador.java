@@ -1,8 +1,6 @@
 package com.upao.pe.nutricampus.controladores;
 
-import com.upao.pe.nutricampus.modelos.Usuario;
 import com.upao.pe.nutricampus.serializers.usuario.BuscarUsuarioRequest;
-import com.upao.pe.nutricampus.serializers.usuario.CrearUsuarioRequest;
 import com.upao.pe.nutricampus.serializers.usuario.EditarUsuarioRequest;
 import com.upao.pe.nutricampus.serializers.usuario.UsuarioSerializer;
 import com.upao.pe.nutricampus.servicios.UsuarioServicio;
@@ -13,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("usuario")
-//@CrossOrigin
 public class UsuarioControlador {
 
     @Autowired private UsuarioServicio usuarioServicio;

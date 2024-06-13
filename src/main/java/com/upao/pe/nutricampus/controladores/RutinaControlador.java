@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("rutina")
-//@CrossOrigin
 public class RutinaControlador {
 
     @Autowired private RutinaServicio rutinaServicio;
