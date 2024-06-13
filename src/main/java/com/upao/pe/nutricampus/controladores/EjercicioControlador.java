@@ -10,7 +10,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("ejercicio")
-//@CrossOrigin
 public class EjercicioControlador {
 
     @Autowired private EjercicioServicio ejercicioServicio;

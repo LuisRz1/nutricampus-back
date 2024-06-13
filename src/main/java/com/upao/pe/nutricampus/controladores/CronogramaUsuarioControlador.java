@@ -9,7 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("cronograma-usuario")
-//@CrossOrigin
 public class CronogramaUsuarioControlador {
 
     @Autowired private CronogramaUsuarioServicio cronogramaUsuarioServicio;

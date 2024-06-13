@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("cronograma-semanal")
-//@CrossOrigin
 public class CronogramaSemanalControlador {
 
     @Autowired private CronogramaSemanalServicio cronogramaSemanalServicio;
