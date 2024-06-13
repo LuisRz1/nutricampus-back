@@ -7,6 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class UsuarioSerializer {
     private String nombreUsuario;
+    private String nombreCompleto;
     private int edad;
     private double peso;
     private double talla;

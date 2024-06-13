@@ -21,6 +21,8 @@ public class Usuario implements UserDetails {
     private Long idUsuario;
     @Column(name = "nombre_usuario", nullable = false)
     private String nombreUsuario;
+    @Column(name = "nombre", nullable = false)
+    private String nombreCompleto;
     @Column(name = "correo", nullable = false)
     private String correo;
     @Column(name = "contra", nullable = false)
@@ -42,9 +44,10 @@ public class Usuario implements UserDetails {
     @Column(name = "activo", nullable = false)
     private boolean activo;
 
-    public Usuario(Long idUsuario, String nombreUsuario, String correo, String contra, int edad, double peso, double talla, char genero, char nivelActividad, double meta, char velocidadEjercicio){
+    public Usuario(Long idUsuario, String nombreUsuario, String nombreCompleto, String correo, String contra, int edad, double peso, double talla, char genero, char nivelActividad, double meta, char velocidadEjercicio){
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
+        this.nombreCompleto = nombreCompleto;
         this.correo = correo;
         this.contra = contra;
         this.edad = edad;

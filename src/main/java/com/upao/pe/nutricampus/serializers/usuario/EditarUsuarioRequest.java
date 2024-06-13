@@ -7,6 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class EditarUsuarioRequest {
     private String nombreUsuario;
+    private String nombreCompleto;
     private String contra;
     private double peso;
     private double talla;

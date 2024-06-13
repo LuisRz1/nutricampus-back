@@ -48,7 +48,7 @@ public class AutenticacionServicio {
         tokenConfirmacion.setFechaActivacion(LocalDateTime.now());
         tokenServicio.guardarCambios(tokenConfirmacion);
         Usuario usuario = tokenConfirmacion.getUsuario();
-        EditarUsuarioRequest request = new EditarUsuarioRequest(usuario.getNombreUsuario(), usuario.getContra(), usuario.getPeso(), usuario.getTalla(), usuario.getGenero(), usuario.getNivelActividad(), usuario.getMeta(), usuario.getVelocidadEjercicio(),true);
+        EditarUsuarioRequest request = new EditarUsuarioRequest(usuario.getNombreUsuario(), usuario.getNombreCompleto(), usuario.getContra(), usuario.getPeso(), usuario.getTalla(), usuario.getGenero(), usuario.getNivelActividad(), usuario.getMeta(), usuario.getVelocidadEjercicio(),true);
         usuarioServicio.editarUsuario(request);
         return " <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"center\" width=\"100%\">\n" +
                 "    <tr>\n" +
@@ -89,9 +89,9 @@ public class AutenticacionServicio {
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Usuario y/o password incorrectos");
     }
 
-    public String obtenerNombreUsuario(ObtenerUsuarioRequest request){
+    public TokenResponse obtenerNombreUsuario(ObtenerUsuarioRequest request){
         String jwtToken = request.getToken();
         String token = EncryptionUtil.decrypt(jwtToken);
-        return jwtTokenUtil.getUserNameFromToken(token);
+        return new TokenResponse(jwtTokenUtil.getUserNameFromToken(token));
     }
 }
