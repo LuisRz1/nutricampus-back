@@ -7,6 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class CrearUsuarioRequest {
     private String nombreUsuario;
+    private String nombreCompleto;
     private String correo;
     private String contra;
     private int edad;

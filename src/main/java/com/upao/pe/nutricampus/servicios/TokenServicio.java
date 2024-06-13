@@ -17,7 +17,7 @@ public class TokenServicio {
 
     public void enviarEmail(Usuario usuario) { //Cambiar URL a la del back desplegado
         String token = generarToken(usuario);
-        String url = "http://localhost:9000/autenticacion/token-confirmacion/"+token; //modificar puerto
+        String url = "http://localhost:8082/autenticacion/token-confirmacion/"+token; //modificar puerto
         String mensaje = "Felicidades "+usuario.getNombreUsuario()+" por registrar su cuenta, estas a un solo paso de poder hacer uso " +
                 "de las funciones de Nutricampus, entra a este link para que puedas registrate," +url;
         emailServicio.sendEmail(usuario.getCorreo(), "Activacion de cuenta", mensaje);

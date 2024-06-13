@@ -29,7 +29,7 @@ public class AutenticacionControlador {
     }
 
     @PostMapping("/obtener-usuario-token/")
-    public String obtenerUsuarioPorToken(@Valid @RequestBody ObtenerUsuarioRequest request){
+    public TokenResponse obtenerUsuarioPorToken(@Valid @RequestBody ObtenerUsuarioRequest request){
         return autenticacionServicio.obtenerNombreUsuario(request);
     }
 }
