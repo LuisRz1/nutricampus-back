@@ -21,7 +21,7 @@ public class UsuarioServicio {
 
     // CREATE
     public Usuario crearUsuario(CrearUsuarioRequest request){
-        Usuario usuario = new Usuario(null, request.getNombreUsuario(), request.getNombreCompleto(), request.getCorreo(), request.getContra(), request.getEdad(), request.getPeso(), request.getTalla(), request.getGenero(), request.getNivelActividad(), request.getMeta(), request.getVelocidadEjercicio());
+        Usuario usuario = new Usuario(null, request.getNombreUsuario(), request.getNombreCompleto(), request.getCorreo(), request.getContra(), request.getFoto(), request.getEdad(), request.getPeso(), request.getTalla(), request.getGenero(), request.getNivelActividad(), request.getHistorialSalud(), request.getMeta(), request.getPreferenciasDieteticas(), request.getAlimentos());
         if(usuarioRepositorio.existsUsuarioByNombreUsuario(usuario.getNombreUsuario())){
             throw new RecursoExistenteExcepcion("El usuario "+usuario.getNombreUsuario()+" existe");
         }
@@ -35,13 +35,16 @@ public class UsuarioServicio {
     public UsuarioSerializer editarUsuario(EditarUsuarioRequest request){
         Usuario usuario = buscarPorNombreUsuario(request.getNombreUsuario());
         usuario.setNombreCompleto(request.getNombreCompleto());
-        usuario.setContra(request.getContra());
+        usuario.setFoto(request.getFoto());
+        usuario.setEdad(request.getEdad());
         usuario.setPeso(request.getPeso());
         usuario.setTalla(request.getTalla());
         usuario.setGenero(request.getGenero());
         usuario.setNivelActividad(request.getNivelActividad());
+        usuario.setHistorialSalud(request.getHistorialSalud());
         usuario.setMeta(request.getMeta());
-        usuario.setVelocidadEjercicio(request.getVelocidadEjercicio());
+        usuario.setPreferenciasDieteticas(request.getPreferenciasDieteticas());
+        usuario.setAlimentos(request.getAlimentos());
         usuario.setActivo(request.isActivo());
         usuarioRepositorio.saveAndFlush(usuario);
         return retornarUsuarioSerializer(usuario);
@@ -59,7 +62,7 @@ public class UsuarioServicio {
 
     // Mapear a Serializer
     public UsuarioSerializer retornarUsuarioSerializer(Usuario usuario){
-        return new UsuarioSerializer(usuario.getNombreUsuario(), usuario.getNombreCompleto(), usuario.getEdad(), usuario.getPeso(), usuario.getTalla(), usuario.getGenero(), usuario.getNivelActividad(), usuario.getMeta(), usuario.getVelocidadEjercicio());
+        return new UsuarioSerializer(usuario.getNombreUsuario(), usuario.getNombreCompleto(), usuario.getFoto(), usuario.getEdad(), usuario.getPeso(), usuario.getTalla(), usuario.getGenero(), usuario.getNivelActividad(), usuario.getHistorialSalud(), usuario.getMeta(), usuario.getPreferenciasDieteticas(), usuario.getAlimentos());
     }
 
     // Buscar por nombre de usuario

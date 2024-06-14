@@ -27,6 +27,8 @@ public class Usuario implements UserDetails {
     private String correo;
     @Column(name = "contra", nullable = false)
     private String contra;
+    @Column(name = "foto", columnDefinition = "text")
+    private String foto;
     @Column(name = "edad", nullable = false)
     private int edad;
     @Column(name = "peso", nullable = false)
@@ -37,26 +39,33 @@ public class Usuario implements UserDetails {
     private char genero;
     @Column(name = "nivel_actividad", nullable = false)
     private char nivelActividad;
+    @Column(name = "historial_salud", columnDefinition = "text")
+    private String historialSalud;
     @Column(name = "meta")
-    private double meta;
-    @Column(name = "velocidad_ejercicio", nullable = false)
-    private char velocidadEjercicio;
+    private char meta;
+    @Column(name = "preferencias_dieteticas", nullable = false)
+    private char preferenciasDieteticas;
+    @Column(name = "alimentos")
+    private String alimentos;
     @Column(name = "activo", nullable = false)
     private boolean activo;
 
-    public Usuario(Long idUsuario, String nombreUsuario, String nombreCompleto, String correo, String contra, int edad, double peso, double talla, char genero, char nivelActividad, double meta, char velocidadEjercicio){
+    public Usuario(Long idUsuario, String nombreUsuario, String nombreCompleto, String correo, String contra, String foto, int edad, double peso, double talla, char genero, char nivelActividad, String historialSalud, char meta, char preferenciasDieteticas, String alimentos){
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.nombreCompleto = nombreCompleto;
         this.correo = correo;
         this.contra = contra;
+        this.foto = foto;
         this.edad = edad;
         this.peso = peso;
         this.talla = talla;
         this.genero = genero;
         this.nivelActividad = nivelActividad;
+        this.historialSalud = historialSalud;
         this.meta = meta;
-        this.velocidadEjercicio = velocidadEjercicio;
+        this.preferenciasDieteticas = preferenciasDieteticas;
+        this.alimentos = alimentos;
         activo = false;
     }
 

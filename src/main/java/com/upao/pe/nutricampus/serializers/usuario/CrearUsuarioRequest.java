@@ -10,11 +10,14 @@ public class CrearUsuarioRequest {
     private String nombreCompleto;
     private String correo;
     private String contra;
+    private String foto;
     private int edad;
     private double peso;
     private double talla;
     private char genero;
     private char nivelActividad;
-    private double meta;
-    private char velocidadEjercicio;
+    private String historialSalud;
+    private char meta;
+    private char preferenciasDieteticas;
+    private String alimentos;
 }
