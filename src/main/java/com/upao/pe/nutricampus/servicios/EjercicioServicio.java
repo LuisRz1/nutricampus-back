@@ -2,9 +2,12 @@ package com.upao.pe.nutricampus.servicios;
 
 import com.upao.pe.nutricampus.modelos.Ejercicio;
 import com.upao.pe.nutricampus.repositorios.EjercicioRepositorio;
+import com.upao.pe.nutricampus.serializers.ejercicio.EditarEjercicioRequest;
 import com.upao.pe.nutricampus.serializers.ejercicio.EjercicioSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,32 +21,27 @@ public class EjercicioServicio {
 
     // CREATE
     public EjercicioSerializer crearEjercicio(EjercicioSerializer request){
-        Ejercicio ejercicio = new Ejercicio(null, request.getNombre(), request.getDescripcion(), request.getTiempoEjercicio(), request.getCaloriasQuemadas(), request.getVelocidadEjercicio());
+        Ejercicio ejercicio = new Ejercicio(null, request.getNombre(), request.getDescripcion(), request.getTiempoEjercicio(), request.getCaloriasQuemadas(), request.getVelocidadEjercicio(), new ArrayList<>());
         return retornarEjercicioSerializer(ejercicioRepositorio.save(ejercicio));
     }
 
     // UPDATE
-    public EjercicioSerializer editarEjercicio(Ejercicio request){
-        Optional<Ejercicio> ejercicio = ejercicioRepositorio.findById(request.getIdEjercicio());
-        if(ejercicio.isEmpty()){
-            throw new RuntimeException("Ejercicio no encontrado");
-        }
-        ejercicio.get().setNombre(request.getNombre());
-        ejercicio.get().setDescripcion(request.getDescripcion());
-        ejercicio.get().setTiempoEjercicio(request.getTiempoEjercicio());
-        ejercicio.get().setCaloriasQuemadas(request.getCaloriasQuemadas());
-        ejercicio.get().setVelocidadEjercicio(request.getVelocidadEjercicio());
-        ejercicioRepositorio.saveAndFlush(ejercicio.get());
-        return retornarEjercicioSerializer(ejercicio.get());
+    public EjercicioSerializer editarEjercicio(String nombre, EditarEjercicioRequest request){
+        Ejercicio ejercicio = buscarEjercicio(nombre);
+        ejercicio.setNombre(request.getNombre());
+        ejercicio.setDescripcion(request.getDescripcion());
+        ejercicio.setTiempoEjercicio(request.getTiempoEjercicio());
+        ejercicio.setCaloriasQuemadas(request.getCaloriasQuemadas());
+        ejercicio.setVelocidadEjercicio(request.getVelocidadEjercicio());
+        ejercicio.setEjercicioRutinas(request.getEjercicioRutinas());
+        ejercicioRepositorio.saveAndFlush(ejercicio);
+        return retornarEjercicioSerializer(ejercicio);
     }
 
     // DELETE
-    public List<EjercicioSerializer> eliminarEjercicio(Long id){
-        Optional<Ejercicio> ejercicio = ejercicioRepositorio.findById(id);
-        if(ejercicio.isEmpty()){
-            throw new RuntimeException("Ejercicio no encontrado");
-        }
-        ejercicioRepositorio.delete(ejercicio.get());
+    public List<EjercicioSerializer> eliminarEjercicio(String nombre){
+        Ejercicio ejercicio = buscarEjercicio(nombre);
+        ejercicioRepositorio.delete(ejercicio);
         return listarEjercicios();
     }
 

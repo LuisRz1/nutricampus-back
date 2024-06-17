@@ -1,14 +1,27 @@
 package com.upao.pe.nutricampus.serializers.hora_dia;
 
-import jakarta.persistence.Column;
+import com.upao.pe.nutricampus.serializers.DietaComida;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Entity
 public class HoraDia {
+    @Id
     private Long idHoraDia;
-    private String hora;
+    private LocalDate fecha;
+    private LocalTime hora;
+    @OneToMany(mappedBy = "horaDia", cascade = CascadeType.ALL)
+    private List<DietaComida> dietaComidas;
 }

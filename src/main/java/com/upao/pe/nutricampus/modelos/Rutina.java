@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -21,9 +22,6 @@ public class Rutina {
     private int repeticiones;
     @Column(name = "tiempo", nullable = false)
     private LocalTime tiempo;
-    @JoinColumns({
-            @JoinColumn(name = "id_ejercicio", referencedColumnName = "id_ejercicio", nullable = false)
-    })
-    @ManyToOne
-    private Ejercicio ejercicio;
+    @OneToMany(mappedBy = "rutina", cascade = CascadeType.ALL)
+    private List<EjercicioRutina> ejercicioRutinas;
 }

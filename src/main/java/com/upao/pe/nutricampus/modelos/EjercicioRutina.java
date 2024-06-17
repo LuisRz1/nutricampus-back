@@ -1,0 +1,32 @@
+package com.upao.pe.nutricampus.modelos;
+
+import com.upao.pe.nutricampus.serializers.hora_dia.HoraDia;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Table(name = "ejercicio_rutina")
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class EjercicioRutina {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_ejercicio_rutina")
+    private Long idEjercicioRutina;
+
+    @ManyToOne
+    @JoinColumn(name = "id_rutina", nullable = false)
+    private Rutina rutina;
+
+    @ManyToOne
+    @JoinColumn(name = "id_ejercicio", nullable = false)
+    private Ejercicio ejercicio;
+
+    @ManyToOne
+    @JoinColumn(name = "id_hora_dia", nullable = false)
+    private HoraDia horaDia;
+
+}

@@ -1,5 +1,5 @@
 package com.upao.pe.nutricampus.servicios;
-
+/*
 import com.upao.pe.nutricampus.modelos.CronogramaSemanal;
 import com.upao.pe.nutricampus.modelos.Rutina;
 import com.upao.pe.nutricampus.repositorios.CronogramaSemanalRepositorio;
@@ -72,3 +72,5 @@ public class CronogramaSemanalServicio {
         return new CronogramaSemanalSerializer(cronogramaSemanal.getFechaInicio(), cronogramaSemanal.getFechaFin(), cronogramaSemanal.getDia(), cronogramaSemanal.isCompletado(), rutinaServicio.retornarRutinaSerializer(cronogramaSemanal.getRutina()), horaDietaDTO);
     }
 }
+
+ */

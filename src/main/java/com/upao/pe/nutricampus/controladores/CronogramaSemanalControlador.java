@@ -1,5 +1,5 @@
 package com.upao.pe.nutricampus.controladores;
-
+/*
 import com.upao.pe.nutricampus.serializers.cronogramasemanal.CrearCronogramaSemanalRequest;
 import com.upao.pe.nutricampus.serializers.cronogramasemanal.CronogramaSemanalSerializer;
 import com.upao.pe.nutricampus.serializers.cronogramasemanal.EditarCronogramaSemanalRequest;
@@ -35,3 +35,5 @@ public class CronogramaSemanalControlador {
         return cronogramaSemanalServicio.eliminarCronogramaSemanal(id);
     }
 }
+
+ */

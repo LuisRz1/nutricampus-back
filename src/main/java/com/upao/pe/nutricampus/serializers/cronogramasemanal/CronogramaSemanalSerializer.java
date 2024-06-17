@@ -1,6 +1,5 @@
 package com.upao.pe.nutricampus.serializers.cronogramasemanal;
 
-import com.upao.pe.nutricampus.serializers.hora_dieta.HoraDietaSerializer;
 import com.upao.pe.nutricampus.serializers.rutina.RutinaSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;

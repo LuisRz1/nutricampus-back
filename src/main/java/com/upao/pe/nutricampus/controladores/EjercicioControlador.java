@@ -1,6 +1,7 @@
 package com.upao.pe.nutricampus.controladores;
 
 import com.upao.pe.nutricampus.modelos.Ejercicio;
+import com.upao.pe.nutricampus.serializers.ejercicio.EditarEjercicioRequest;
 import com.upao.pe.nutricampus.serializers.ejercicio.EjercicioSerializer;
 import com.upao.pe.nutricampus.servicios.EjercicioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,13 @@ public class EjercicioControlador {
         return ejercicioServicio.crearEjercicio(request);
     }
 
-    @PutMapping("/editar/")
-    public EjercicioSerializer editarEjercicio(@RequestBody Ejercicio request){
-        return ejercicioServicio.editarEjercicio(request);
+    @PutMapping("/editar/{nombre}")
+    public EjercicioSerializer editarEjercicio(@PathVariable String nombre, @RequestBody EditarEjercicioRequest request){
+        return ejercicioServicio.editarEjercicio(nombre, request);
     }
 
-    @DeleteMapping("/eliminar/")
-    public List<EjercicioSerializer> eliminarEjercicio(@RequestBody Long id){
-        return ejercicioServicio.eliminarEjercicio(id);
+    @DeleteMapping("/eliminar/{nombre}")
+    public List<EjercicioSerializer> eliminarEjercicio(@PathVariable String nombre){
+        return ejercicioServicio.eliminarEjercicio(nombre);
     }
 }

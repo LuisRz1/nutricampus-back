@@ -25,13 +25,13 @@ public class RutinaControlador {
         return rutinaServicio.crearRutina(request);
     }
 
-    @PutMapping("/editar/")
-    public RutinaSerializer editarRutina(@RequestBody EditarRutinaRequest request){
-        return rutinaServicio.editarRutina(request);
+    @PutMapping("/editar/{id}")
+    public RutinaSerializer editarRutina(@PathVariable Long id, @RequestBody EditarRutinaRequest request){
+        return rutinaServicio.editarRutina(id, request);
     }
 
-    @DeleteMapping("/eliminar/")
-    public List<RutinaSerializer> eliminarRutina(@RequestBody Long id){
+    @DeleteMapping("/eliminar/{id}")
+    public List<RutinaSerializer> eliminarRutina(@PathVariable Long id){
         return rutinaServicio.eliminarRutina(id);
     }
 }

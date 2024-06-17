@@ -5,11 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 public class RutinaSerializer {
     private int repeticiones;
     private LocalTime tiempo;
-    private EjercicioSerializer ejercicio;
+    private List<EjercicioHoraDia> ejercicios;
 }

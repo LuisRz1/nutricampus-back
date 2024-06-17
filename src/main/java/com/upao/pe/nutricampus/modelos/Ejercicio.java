@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -27,4 +28,6 @@ public class Ejercicio {
     private double caloriasQuemadas;
     @Column(name = "velocidad_ejercicio")
     private char velocidadEjercicio;
+    @OneToMany(mappedBy = "ejercicio", cascade = CascadeType.ALL)
+    private List<EjercicioRutina> ejercicioRutinas;
 }

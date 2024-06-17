@@ -34,4 +34,5 @@ public class TokenConfirmacion {
         this.token = token;
         this.usuario = usuario;
     }
+
 }

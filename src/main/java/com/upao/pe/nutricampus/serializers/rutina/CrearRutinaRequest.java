@@ -4,11 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 public class CrearRutinaRequest {
     private int repeticiones;
     private LocalTime tiempo;
-    private String nombreEjercicio;
+    private List<EjercicioConHoraCrear> ejercicios;
 }
