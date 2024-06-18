@@ -1,5 +1,5 @@
 package com.upao.pe.nutricampus.controladores;
-/*
+
 import com.upao.pe.nutricampus.serializers.cronogramasemanal.CrearCronogramaSemanalRequest;
 import com.upao.pe.nutricampus.serializers.cronogramasemanal.CronogramaSemanalSerializer;
 import com.upao.pe.nutricampus.serializers.cronogramasemanal.EditarCronogramaSemanalRequest;
@@ -25,15 +25,13 @@ public class CronogramaSemanalControlador {
         return cronogramaSemanalServicio.crearCronogramaSemanal(request);
     }
 
-    @PutMapping("/editar/")
-    public CronogramaSemanalSerializer editarCronogramaSemanal(@RequestBody EditarCronogramaSemanalRequest request){
-        return cronogramaSemanalServicio.editarCronogramaSemanal(request);
+    @PutMapping("/editar/{id}")
+    public CronogramaSemanalSerializer editarCronogramaSemanal(@PathVariable Long id, @RequestBody EditarCronogramaSemanalRequest request){
+        return cronogramaSemanalServicio.editarCronogramaSemanal(id, request);
     }
 
-    @DeleteMapping("/eliminar/")
-    public List<CronogramaSemanalSerializer> eliminarCronogramaSemanal(@RequestBody Long id){
+    @DeleteMapping("/eliminar/{id}")
+    public List<CronogramaSemanalSerializer> eliminarCronogramaSemanal(@PathVariable Long id){
         return cronogramaSemanalServicio.eliminarCronogramaSemanal(id);
     }
 }
-
- */

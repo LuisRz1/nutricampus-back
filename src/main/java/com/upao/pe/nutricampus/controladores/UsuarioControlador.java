@@ -20,13 +20,13 @@ public class UsuarioControlador {
         return usuarioServicio.listarUsuarios();
     }
 
-    @PutMapping("/editar/")
-    public UsuarioSerializer editarUsuario(@RequestBody EditarUsuarioRequest request){
-        return usuarioServicio.editarUsuario(request);
+    @PutMapping("/editar/{usuario}")
+    public UsuarioSerializer editarUsuario(@PathVariable String usuario, @RequestBody EditarUsuarioRequest request){
+        return usuarioServicio.editarUsuario(usuario, request);
     }
 
-    @DeleteMapping("/eliminar/")
-    public List<UsuarioSerializer> eliminarUsuario(@RequestBody String usuario){
+    @DeleteMapping("/eliminar/{usuario}")
+    public List<UsuarioSerializer> eliminarUsuario(@PathVariable String usuario){
         return usuarioServicio.eliminarusuario(usuario);
     }
 

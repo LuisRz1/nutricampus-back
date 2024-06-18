@@ -11,6 +11,5 @@ public class CrearCronogramaSemanalRequest {
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private String dia;
-    private Long idRutina;
-    private Long idHoraDieta;
+    private String nombreUsuario;
 }

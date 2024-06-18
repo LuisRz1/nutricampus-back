@@ -1,8 +1,5 @@
 package com.upao.pe.nutricampus.modelos;
-/*
-import com.upao.pe.nutricampus.modelos.CronogramaSemanal;
-import com.upao.pe.nutricampus.modelos.Usuario;
-import com.upao.pe.nutricampus.modelos.cronogramausuario.CronogramaUsuarioPK;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,21 +9,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "cronograma_usuario")
 @Entity
-@IdClass(value = CronogramaUsuarioPK.class)
 public class CronogramaUsuario {
     @Id
-    @JoinColumns({
-            @JoinColumn(name="id_usuario", referencedColumnName="id_usuario")
-    })
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_cronograma_usuario")
+    private Long idCronogramaUsuario;
     @ManyToOne
-    Usuario usuario;
-    @Id
-    @JoinColumns({
-            @JoinColumn(name="id_cronograma_semanal", referencedColumnName="id_cronograma_semanal")
-    })
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
     @ManyToOne
-    CronogramaSemanal cronogramaSemanal;
+    @JoinColumn(name = "id_cronograma_semanal", nullable = false)
+    private CronogramaSemanal cronogramaSemanal;
 
 }
-
- */

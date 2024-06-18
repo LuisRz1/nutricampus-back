@@ -1,7 +1,10 @@
 package com.upao.pe.nutricampus.serializers.usuario;
 
+import com.upao.pe.nutricampus.serializers.cronogramasemanal.CronogramaSemanalSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -18,4 +21,5 @@ public class UsuarioSerializer {
     private char meta;
     private char preferenciasDieteticas;
     private String alimentos;
+    private List<CronogramaSemanalSerializer> cronogramaSemanal;
 }

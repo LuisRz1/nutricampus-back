@@ -6,7 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-/*
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,14 +26,6 @@ public class CronogramaSemanal {
     private String dia;
     @Column(name = "completado", nullable = false)
     private boolean completado;
-    @Column(name = "id_hora_dieta", nullable = false)
-    private Long idHoraDieta;
-    @JoinColumns({
-            @JoinColumn(name="id_rutina", referencedColumnName="id_rutina")
-    })
-    @ManyToOne
-    Rutina rutina;
-
+    @OneToMany(mappedBy = "cronogramaSemanal", cascade = CascadeType.ALL)
+    private List<CronogramaUsuario> cronogramaUsuario;
 }
-
- */

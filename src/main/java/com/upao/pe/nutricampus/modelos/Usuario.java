@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -49,8 +50,10 @@ public class Usuario implements UserDetails {
     private String alimentos;
     @Column(name = "activo", nullable = false)
     private boolean activo;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<CronogramaUsuario> cronogramaUsuario;
 
-    public Usuario(Long idUsuario, String nombreUsuario, String nombreCompleto, String correo, String contra, String foto, int edad, double peso, double talla, char genero, char nivelActividad, String historialSalud, char meta, char preferenciasDieteticas, String alimentos){
+    public Usuario(Long idUsuario, String nombreUsuario, String nombreCompleto, String correo, String contra, String foto, int edad, double peso, double talla, char genero, char nivelActividad, String historialSalud, char meta, char preferenciasDieteticas, String alimentos, List<CronogramaUsuario> cronogramaUsuario){
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.nombreCompleto = nombreCompleto;
@@ -67,6 +70,7 @@ public class Usuario implements UserDetails {
         this.preferenciasDieteticas = preferenciasDieteticas;
         this.alimentos = alimentos;
         activo = false;
+        this.cronogramaUsuario = cronogramaUsuario;
     }
 
     @Override
