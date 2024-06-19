@@ -1,5 +1,7 @@
 package com.upao.pe.nutricampus.serializers.hora_dia;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.upao.pe.nutricampus.modelos.EjercicioRutina;
 import com.upao.pe.nutricampus.serializers.DietaComida;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -23,5 +25,9 @@ public class HoraDia {
     private LocalDate fecha;
     private LocalTime hora;
     @OneToMany(mappedBy = "horaDia", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<DietaComida> dietaComidas;
+    @OneToMany(mappedBy = "horaDia", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<EjercicioRutina> ejercicioRutinas;
 }

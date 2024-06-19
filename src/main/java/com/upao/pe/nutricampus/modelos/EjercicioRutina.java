@@ -1,5 +1,6 @@
 package com.upao.pe.nutricampus.modelos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.upao.pe.nutricampus.serializers.hora_dia.HoraDia;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EjercicioRutina {
+    // Repeticiones
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_ejercicio_rutina")
@@ -23,10 +25,12 @@ public class EjercicioRutina {
 
     @ManyToOne
     @JoinColumn(name = "id_ejercicio", nullable = false)
+    @JsonIgnore
     private Ejercicio ejercicio;
 
     @ManyToOne
     @JoinColumn(name = "id_hora_dia", nullable = false)
+    @JsonIgnore
     private HoraDia horaDia;
 
 }

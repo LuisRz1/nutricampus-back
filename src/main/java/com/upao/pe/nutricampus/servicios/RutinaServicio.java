@@ -30,7 +30,7 @@ public class RutinaServicio {
 
     // CREATE
     public RutinaSerializer crearRutina(CrearRutinaRequest request){
-        Rutina rutina = new Rutina(null, request.getRepeticiones(), request.getTiempo(), null);
+        Rutina rutina = new Rutina(null, request.getRepeticiones(), request.getTiempo(), null, null);
         rutinaRepositorio.save(rutina);
         // Generar la lista de la tabla intermedia EjercicioRutina
         List<EjercicioRutina> ejercicioRutinas = new ArrayList<>();
@@ -56,6 +56,7 @@ public class RutinaServicio {
         rutina.setRepeticiones(request.getRepeticiones());
         rutina.setTiempo(request.getTiempo());
         rutina.setEjercicioRutinas(request.getEjercicioRutinas());
+        rutina.setRutinaCronogramas(request.getRutinaCronogramas());
         rutinaRepositorio.saveAndFlush(rutina);
         return retornarRutinaSerializer(rutina);
     }

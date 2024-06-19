@@ -1,14 +1,20 @@
 package com.upao.pe.nutricampus.servicios;
 
 import com.upao.pe.nutricampus.excepciones.RecursoExistenteExcepcion;
+import com.upao.pe.nutricampus.modelos.DietaCronograma;
+import com.upao.pe.nutricampus.modelos.RutinaCronograma;
 import com.upao.pe.nutricampus.modelos.Usuario;
 import com.upao.pe.nutricampus.repositorios.UsuarioRepositorio;
 import com.upao.pe.nutricampus.serializers.cronogramasemanal.CronogramaSemanalSerializer;
+import com.upao.pe.nutricampus.serializers.dieta.DietaSerializer;
+import com.upao.pe.nutricampus.serializers.rutina.RutinaSerializer;
 import com.upao.pe.nutricampus.serializers.usuario.CrearUsuarioRequest;
 import com.upao.pe.nutricampus.serializers.usuario.EditarUsuarioRequest;
 import com.upao.pe.nutricampus.serializers.usuario.UsuarioSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +24,11 @@ import java.util.Optional;
 public class UsuarioServicio {
 
     @Autowired private UsuarioRepositorio usuarioRepositorio;
+    @Autowired
+    private RutinaServicio rutinaServicio;
+    @Autowired private RestTemplate restTemplate;
+    @Value("${dieta.service.url}")
+    private String url;
 
     // READ
     public List<UsuarioSerializer> listarUsuarios(){return usuarioRepositorio.findAll().stream().map(this::retornarUsuarioSerializer).toList();}
@@ -64,9 +75,18 @@ public class UsuarioServicio {
     // Mapear a Serializer
     public UsuarioSerializer retornarUsuarioSerializer(Usuario usuario){
         List<CronogramaSemanalSerializer> cronogramas = new ArrayList<>();
+        List<RutinaSerializer> rutinas = new ArrayList<>();
+        List<DietaSerializer> dietas = new ArrayList<>();
         if(usuario.getCronogramaUsuario() != null){
             for(int i = 0; i < usuario.getCronogramaUsuario().size(); i++){
-                cronogramas.add(new CronogramaSemanalSerializer(usuario.getCronogramaUsuario().get(i).getCronogramaSemanal().getFechaInicio(), usuario.getCronogramaUsuario().get(i).getCronogramaSemanal().getFechaFin(), usuario.getCronogramaUsuario().get(i).getCronogramaSemanal().getDia(), usuario.getCronogramaUsuario().get(i).getCronogramaSemanal().isCompletado()));
+                for(RutinaCronograma rutinaEjercicio : usuario.getCronogramaUsuario().get(i).getCronogramaSemanal().getRutinaCronogramas()){
+                    RutinaSerializer rutina = rutinaServicio.retornarRutinaSerializer(rutinaEjercicio.getRutina());
+                    rutinas.add(rutina);
+                }
+                for(DietaCronograma dietaCronograma : usuario.getCronogramaUsuario().get(i).getCronogramaSemanal().getDietaCronogramas()){
+                    dietas.add(restTemplate.postForObject(url+"/dieta/serializer/", dietaCronograma.getDieta(), DietaSerializer.class));
+                }
+                cronogramas.add(new CronogramaSemanalSerializer(usuario.getCronogramaUsuario().get(i).getCronogramaSemanal().getFechaInicio(), usuario.getCronogramaUsuario().get(i).getCronogramaSemanal().getFechaFin(), usuario.getCronogramaUsuario().get(i).getCronogramaSemanal().getDia(), usuario.getCronogramaUsuario().get(i).getCronogramaSemanal().isCompletado(), rutinas, dietas));
             }
         }
         return new UsuarioSerializer(usuario.getNombreUsuario(), usuario.getNombreCompleto(), usuario.getFoto(), usuario.getEdad(), usuario.getPeso(), usuario.getTalla(), usuario.getGenero(), usuario.getNivelActividad(), usuario.getHistorialSalud(), usuario.getMeta(), usuario.getPreferenciasDieteticas(), usuario.getAlimentos(), cronogramas);

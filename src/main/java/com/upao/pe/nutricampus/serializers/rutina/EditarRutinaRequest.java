@@ -1,6 +1,7 @@
 package com.upao.pe.nutricampus.serializers.rutina;
 
 import com.upao.pe.nutricampus.modelos.EjercicioRutina;
+import com.upao.pe.nutricampus.modelos.RutinaCronograma;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -13,4 +14,5 @@ public class EditarRutinaRequest {
     private int repeticiones;
     private LocalTime tiempo;
     private List<EjercicioRutina> ejercicioRutinas;
+    private List<RutinaCronograma> rutinaCronogramas;
 }

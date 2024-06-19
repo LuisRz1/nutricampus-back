@@ -1,5 +1,6 @@
 package com.upao.pe.nutricampus.modelos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,5 +24,9 @@ public class Rutina {
     @Column(name = "tiempo", nullable = false)
     private LocalTime tiempo;
     @OneToMany(mappedBy = "rutina", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<EjercicioRutina> ejercicioRutinas;
+    @OneToMany(mappedBy = "rutina", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<RutinaCronograma> rutinaCronogramas;
 }

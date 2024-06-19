@@ -1,5 +1,6 @@
 package com.upao.pe.nutricampus.modelos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +17,7 @@ public class CronogramaUsuario {
     private Long idCronogramaUsuario;
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
+    @JsonIgnore
     private Usuario usuario;
     @ManyToOne
     @JoinColumn(name = "id_cronograma_semanal", nullable = false)

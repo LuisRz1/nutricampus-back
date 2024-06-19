@@ -1,5 +1,6 @@
 package com.upao.pe.nutricampus.modelos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,5 +28,10 @@ public class CronogramaSemanal {
     @Column(name = "completado", nullable = false)
     private boolean completado;
     @OneToMany(mappedBy = "cronogramaSemanal", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<CronogramaUsuario> cronogramaUsuario;
+    @OneToMany(mappedBy = "cronogramaSemanal", cascade = CascadeType.ALL)
+    private List<RutinaCronograma> rutinaCronogramas;
+    @OneToMany(mappedBy = "cronogramaSemanal", cascade = CascadeType.ALL)
+    private List<DietaCronograma> dietaCronogramas;
 }
