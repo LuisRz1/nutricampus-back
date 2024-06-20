@@ -11,7 +11,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class EditarRutinaRequest {
-    private int repeticiones;
     private LocalTime tiempo;
     private List<EjercicioRutina> ejercicioRutinas;
     private List<RutinaCronograma> rutinaCronogramas;

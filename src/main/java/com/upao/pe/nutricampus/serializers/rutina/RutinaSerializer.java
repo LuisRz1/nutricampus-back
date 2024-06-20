@@ -10,7 +10,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class RutinaSerializer {
-    private int repeticiones;
     private LocalTime tiempo;
     private List<EjercicioHoraDia> ejercicios;
 }

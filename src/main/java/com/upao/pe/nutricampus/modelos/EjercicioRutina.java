@@ -13,12 +13,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EjercicioRutina {
-    // Repeticiones
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_ejercicio_rutina")
     private Long idEjercicioRutina;
-
+    @Column(name = "repeticiones", nullable = false)
+    private int repeticiones;
     @ManyToOne
     @JoinColumn(name = "id_rutina", nullable = false)
     private Rutina rutina;

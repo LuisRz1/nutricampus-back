@@ -9,7 +9,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class CrearRutinaRequest {
-    private int repeticiones;
     private LocalTime tiempo;
     private List<EjercicioConHoraCrear> ejercicios;
 }

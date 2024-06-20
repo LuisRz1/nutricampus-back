@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 public class DietaComida {
     @Id
     private Long idDietaComida;
+    private int raciones;
     @ManyToOne
     @JoinColumn(name = "id_dieta", nullable = false)
     @JsonIgnore

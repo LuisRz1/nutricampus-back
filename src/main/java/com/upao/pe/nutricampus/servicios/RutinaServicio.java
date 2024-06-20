@@ -30,7 +30,7 @@ public class RutinaServicio {
 
     // CREATE
     public RutinaSerializer crearRutina(CrearRutinaRequest request){
-        Rutina rutina = new Rutina(null, request.getRepeticiones(), request.getTiempo(), null, null);
+        Rutina rutina = new Rutina(null, request.getTiempo(), null, null);
         rutinaRepositorio.save(rutina);
         // Generar la lista de la tabla intermedia EjercicioRutina
         List<EjercicioRutina> ejercicioRutinas = new ArrayList<>();
@@ -39,7 +39,7 @@ public class RutinaServicio {
             Ejercicio ejercicio = ejercicioServicio.buscarEjercicio(ejercicioConHora.getEjercicio());
             HoraDiaSerializer horaDiaSerializer = new HoraDiaSerializer(ejercicioConHora.getFecha().toLocalDate(), ejercicioConHora.getFecha().toLocalTime());
             HoraDia horaDia = restTemplate.postForObject(url+"/hora-dia/buscar/", horaDiaSerializer, HoraDia.class);
-            EjercicioRutina ejercicioRutina = new EjercicioRutina(null, rutina, ejercicio, horaDia);
+            EjercicioRutina ejercicioRutina = new EjercicioRutina(null, ejercicioConHora.getRepeticiones(), rutina, ejercicio, horaDia);
             ejercicioRutinas.add(ejercicioRutina);
         }
 
@@ -53,7 +53,6 @@ public class RutinaServicio {
     // UPDATE
     public RutinaSerializer editarRutina(Long id, EditarRutinaRequest request){
         Rutina rutina = buscarRutina(id);
-        rutina.setRepeticiones(request.getRepeticiones());
         rutina.setTiempo(request.getTiempo());
         rutina.setEjercicioRutinas(request.getEjercicioRutinas());
         rutina.setRutinaCronogramas(request.getRutinaCronogramas());
@@ -72,10 +71,10 @@ public class RutinaServicio {
     public RutinaSerializer retornarRutinaSerializer(Rutina rutina){
         List<EjercicioHoraDia> ejercicios = new ArrayList<>();
         for(int i = 0; i < rutina.getEjercicioRutinas().size(); i++){
-            EjercicioHoraDia ejercicioConFecha = new EjercicioHoraDia(ejercicioServicio.retornarEjercicioSerializer(rutina.getEjercicioRutinas().get(i).getEjercicio()), restTemplate.postForObject(url+"/hora-dia/serializer/", rutina.getEjercicioRutinas().get(i).getHoraDia(), HoraDiaSerializer.class));
+            EjercicioHoraDia ejercicioConFecha = new EjercicioHoraDia(rutina.getEjercicioRutinas().get(i).getRepeticiones(), ejercicioServicio.retornarEjercicioSerializer(rutina.getEjercicioRutinas().get(i).getEjercicio()), restTemplate.postForObject(url+"/hora-dia/serializer/", rutina.getEjercicioRutinas().get(i).getHoraDia(), HoraDiaSerializer.class));
             ejercicios.add(ejercicioConFecha);
         }
-        return new RutinaSerializer(rutina.getRepeticiones(), rutina.getTiempo(), ejercicios);
+        return new RutinaSerializer(rutina.getTiempo(), ejercicios);
     }
 
     public Rutina buscarRutina(Long id){

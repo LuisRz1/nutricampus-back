@@ -19,8 +19,6 @@ public class Rutina {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_rutina")
     private Long idRutina;
-    @Column(name = "repeticiones", nullable = false)
-    private int repeticiones;
     @Column(name = "tiempo", nullable = false)
     private LocalTime tiempo;
     @OneToMany(mappedBy = "rutina", cascade = CascadeType.ALL)

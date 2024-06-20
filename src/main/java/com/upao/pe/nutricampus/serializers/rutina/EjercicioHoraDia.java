@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class EjercicioHoraDia {
+    private int repeticiones;
     private EjercicioSerializer ejercicio;
     private HoraDiaSerializer fecha;
 }

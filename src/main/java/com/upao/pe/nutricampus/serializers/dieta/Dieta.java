@@ -19,7 +19,6 @@ public class Dieta {
     @Id
     @Column(name = "id_dieta")
     private Long idDieta;
-    private int raciones;
     @JsonIgnore
     private Long idComida;
     @OneToMany(mappedBy = "dieta", cascade = CascadeType.ALL)
