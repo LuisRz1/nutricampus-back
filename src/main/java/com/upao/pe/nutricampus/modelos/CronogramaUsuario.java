@@ -1,6 +1,7 @@
 package com.upao.pe.nutricampus.modelos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.upao.pe.nutricampus.serializers.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

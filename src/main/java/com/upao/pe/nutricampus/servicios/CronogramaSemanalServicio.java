@@ -2,11 +2,13 @@ package com.upao.pe.nutricampus.servicios;
 
 import com.upao.pe.nutricampus.modelos.*;
 import com.upao.pe.nutricampus.repositorios.CronogramaSemanalRepositorio;
+import com.upao.pe.nutricampus.serializers.Usuario;
 import com.upao.pe.nutricampus.serializers.cronogramasemanal.CrearCronogramaSemanalRequest;
 import com.upao.pe.nutricampus.serializers.cronogramasemanal.CronogramaSemanalSerializer;
 import com.upao.pe.nutricampus.serializers.cronogramasemanal.EditarCronogramaSemanalRequest;
 import com.upao.pe.nutricampus.serializers.dieta.Dieta;
 import com.upao.pe.nutricampus.serializers.dieta.DietaSerializer;
+import com.upao.pe.nutricampus.serializers.rutina.Rutina;
 import com.upao.pe.nutricampus.serializers.rutina.RutinaSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,11 +23,13 @@ import java.util.Optional;
 public class CronogramaSemanalServicio {
 
     @Autowired private CronogramaSemanalRepositorio cronogramaSemanalRepositorio;
-    @Autowired private UsuarioServicio usuarioServicio;
-    @Autowired private RutinaServicio rutinaServicio;
     @Autowired private RestTemplate restTemplate;
     @Value("${dieta.service.url}")
     private String url;
+    @Value("${rutina.service.url}")
+    private String urlRutina;
+    @Value("${usuario.service.url}")
+    private String urlUsuario;
 
     // READ
     public List<CronogramaSemanalSerializer> listarCronogramaSemanal(){return cronogramaSemanalRepositorio.findAll().stream().map(this::retornarCronogramaSemanalSerializer).toList();}
@@ -37,7 +41,7 @@ public class CronogramaSemanalServicio {
         // Generar relación entre Cronograma y Rutinas
         List<RutinaCronograma> rutinas = new ArrayList<>();
         for(Long id: request.getIdRutinas()){
-            Rutina rutina = rutinaServicio.buscarRutina(id);
+            Rutina rutina = restTemplate.getForObject(urlRutina+"/rutina/buscar/"+id, Rutina.class);
             RutinaCronograma rutinaCronograma = new RutinaCronograma(null, cronogramaSemanal, rutina);
             rutinas.add(rutinaCronograma);
         }
@@ -56,10 +60,10 @@ public class CronogramaSemanalServicio {
         cronogramaSemanalRepositorio.saveAndFlush(cronogramaSemanal);
 
         // Creando relacion con el usuario
-        Usuario usuario = usuarioServicio.buscarPorNombreUsuario(request.getNombreUsuario());
+        Usuario usuario = restTemplate.getForObject(urlUsuario+"/usuario/buscar-por-usuario/"+request.getNombreUsuario(), Usuario.class);
         CronogramaUsuario cronogramaUsuario = new CronogramaUsuario(null, usuario, cronogramaSemanal);
         usuario.getCronogramaUsuario().add(cronogramaUsuario);
-        usuarioServicio.actualizarCambios(usuario);
+        restTemplate.postForLocation(urlUsuario+"/actualizar-cambios/", usuario);
         return retornarCronogramaSemanalSerializer(cronogramaSemanal);
     }
 
@@ -89,7 +93,7 @@ public class CronogramaSemanalServicio {
     public CronogramaSemanalSerializer retornarCronogramaSemanalSerializer(CronogramaSemanal cronogramaSemanal){
         List<RutinaSerializer> rutinas = new ArrayList<>();
         for(int i = 0; i < cronogramaSemanal.getRutinaCronogramas().size(); i++){
-            rutinas.add(rutinaServicio.retornarRutinaSerializer(cronogramaSemanal.getRutinaCronogramas().get(i).getRutina()));
+            rutinas.add(restTemplate.postForObject(urlRutina+"/rutina/serializer/", cronogramaSemanal.getRutinaCronogramas().get(i).getRutina(), RutinaSerializer.class));
         }
 
         List<DietaSerializer> dietas = new ArrayList<>();
