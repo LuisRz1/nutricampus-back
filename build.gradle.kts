@@ -36,8 +36,6 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-mail")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springframework.boot:spring-boot-starter-security")
-	implementation("io.jsonwebtoken:jjwt:0.9.1")
 	implementation("javax.xml.bind:jaxb-api:2.3.0")
 	implementation ("org.springframework.ai:spring-ai-ollama-spring-boot-starter:0.8.0-SNAPSHOT")
 	compileOnly("org.projectlombok:lombok")
