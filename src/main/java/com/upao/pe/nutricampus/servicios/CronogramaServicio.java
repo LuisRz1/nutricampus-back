@@ -37,7 +37,7 @@ public class CronogramaServicio {
     // UPDATE
     public CronogramaSerializer editarCronograma(Long id, EditarCronogramaRequest request){
         Cronograma cronograma = buscarCronograma(id);
-        cronograma.setFechaFin(request.getFechaInicio());
+        cronograma.setFechaInicio(request.getFechaInicio());
         cronograma.setFechaFin(request.getFechaFin());
         cronograma.setNombreEvento(request.getNombreEvento());
         cronograma.setUrl(request.getUrl());
