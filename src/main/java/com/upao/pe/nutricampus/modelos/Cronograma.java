@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -20,13 +20,17 @@ public class Cronograma {
     @Column(name = "id_cronograma")
     private Long idCronograma;
     @Column(name = "fecha_inicio", nullable = false)
-    private LocalDate fechaInicio;
+    private LocalDateTime fechaInicio;
     @Column(name = "fecha_fin", nullable = false)
-    private LocalDate fechaFin;
-    @Column(name = "dia", nullable = false)
-    private String dia;
-    @Column(name = "completado", nullable = false)
-    private boolean completado;
+    private LocalDateTime fechaFin;
+    @Column(name = "nombre_evento", nullable = false)
+    private String nombreEvento;
+    @Column(name = "url", columnDefinition = "text")
+    private String url;
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
+    @Column(name = "color_fondo", nullable = false)
+    private String colorFondo;
     @OneToMany(mappedBy = "cronograma", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<CronogramaUsuario> cronogramaUsuario;

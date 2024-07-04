@@ -16,22 +16,27 @@ public class CronogramaControlador {
     @Autowired private CronogramaServicio cronogramaServicio;
 
     @GetMapping("/listar/")
-    public List<CronogramaSerializer> listarCronogramaSemanal(){
-        return cronogramaServicio.listarCronogramaSemanal();
+    public List<CronogramaSerializer> listarCronograma(){
+        return cronogramaServicio.listarCronogramas();
     }
 
     @PostMapping("/crear/")
-    public CronogramaSerializer crearCronogramaSemanal(@RequestBody CrearCronogramaRequest request){
-        return cronogramaServicio.crearCronogramaSemanal(request);
+    public CronogramaSerializer crearCronograma(@RequestBody CrearCronogramaRequest request){
+        return cronogramaServicio.crearCronograma(request);
     }
 
     @PutMapping("/editar/{id}")
-    public CronogramaSerializer editarCronogramaSemanal(@PathVariable Long id, @RequestBody EditarCronogramaRequest request){
-        return cronogramaServicio.editarCronogramaSemanal(id, request);
+    public CronogramaSerializer editarCronograma(@PathVariable Long id, @RequestBody EditarCronogramaRequest request){
+        return cronogramaServicio.editarCronograma(id, request);
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public List<CronogramaSerializer> eliminarCronogramaSemanal(@PathVariable Long id){
-        return cronogramaServicio.eliminarCronogramaSemanal(id);
+    public List<CronogramaSerializer> eliminarCronograma(@PathVariable Long id){
+        return cronogramaServicio.eliminarCronograma(id);
+    }
+
+    @GetMapping("/listar-por-usuario/{nombre}")
+    public List<CronogramaSerializer> listarCronogramaPorUsuario(@PathVariable() String nombre){
+        return cronogramaServicio.listarCronogramasPorUsuario(nombre);
     }
 }

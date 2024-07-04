@@ -3,14 +3,16 @@ package com.upao.pe.nutricampus.serializers.cronograma;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 public class CrearCronogramaRequest {
-    private LocalDate fechaInicio;
-    private LocalDate fechaFin;
-    private String dia;
+    private LocalDateTime fechaInicio;
+    private LocalDateTime fechaFin;
+    private String nombreEvento;
+    private String nombre;
+    private String url;
     private String nombreUsuario;
+    private String colorFondo;
 }

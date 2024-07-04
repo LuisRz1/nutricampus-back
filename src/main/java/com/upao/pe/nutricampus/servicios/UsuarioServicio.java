@@ -3,9 +3,11 @@ package com.upao.pe.nutricampus.servicios;
 
 
 import com.upao.pe.nutricampus.excepciones.RecursoExistenteExcepcion;
+import com.upao.pe.nutricampus.modelos.CronogramaUsuario;
 import com.upao.pe.nutricampus.modelos.Usuario;
 import com.upao.pe.nutricampus.repositorios.UsuarioRepositorio;
 import com.upao.pe.nutricampus.serializers.cronograma.CronogramaSerializer;
+import com.upao.pe.nutricampus.serializers.cronograma.ExtendedProps;
 import com.upao.pe.nutricampus.serializers.usuario.CrearUsuarioRequest;
 import com.upao.pe.nutricampus.serializers.usuario.EditarUsuarioRequest;
 import com.upao.pe.nutricampus.serializers.usuario.UsuarioSerializer;
@@ -69,8 +71,10 @@ public class UsuarioServicio {
     public UsuarioSerializer retornarUsuarioSerializer(Usuario usuario){
         List<CronogramaSerializer> cronogramas = new ArrayList<>();
         if(usuario.getCronogramaUsuario() != null){
-            for(int i = 0; i < usuario.getCronogramaUsuario().size(); i++){
-                cronogramas.add(new CronogramaSerializer(usuario.getCronogramaUsuario().get(i).getCronograma().getFechaInicio(), usuario.getCronogramaUsuario().get(i).getCronograma().getFechaFin(), usuario.getCronogramaUsuario().get(i).getCronograma().getDia(), usuario.getCronogramaUsuario().get(i).getCronograma().isCompletado()));
+            for(CronogramaUsuario cronogramaUsuario: usuario.getCronogramaUsuario()){
+                ExtendedProps extendedProps = new ExtendedProps(cronogramaUsuario.getCronograma().getNombre());
+                CronogramaSerializer cronograma = new CronogramaSerializer(cronogramaUsuario.getCronograma().getIdCronograma().intValue(), cronogramaUsuario.getCronograma().getFechaInicio(), cronogramaUsuario.getCronograma().getFechaFin(), cronogramaUsuario.getCronograma().getNombreEvento(), cronogramaUsuario.getCronograma().getUrl(), cronogramaUsuario.getCronograma().getColorFondo(), extendedProps);
+                cronogramas.add(cronograma);
             }
         }
         return new UsuarioSerializer(usuario.getNombreUsuario(), usuario.getNombreCompleto(), usuario.getFoto(), usuario.getEdad(), usuario.getPeso(), usuario.getTalla(), usuario.getGenero(), usuario.getNivelActividad(), usuario.getHistorialSalud(), usuario.getMeta(), usuario.getPreferenciasDieteticas(), usuario.getAlimentos(), cronogramas);
