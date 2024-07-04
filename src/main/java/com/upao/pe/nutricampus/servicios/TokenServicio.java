@@ -21,7 +21,7 @@ public class TokenServicio {
         String token = generarToken(usuario);
         String url = "https://nutricampus-back.onrender.com/autenticacion/token-confirmacion/"+token; //modificar puerto
         String mensaje = "Felicidades "+usuario.getNombreUsuario()+" por registrar su cuenta, estas a un solo paso de poder hacer uso " +
-                "de las funciones de Nutricampus, entra a este link para que puedas registrate," +url;
+                "de las funciones de Nutricampus, entra a este link para que puedas registrate, Link: " +url;
         emailServicio.sendEmail(usuario.getCorreo(), "Activacion de cuenta", mensaje);
     }
 
