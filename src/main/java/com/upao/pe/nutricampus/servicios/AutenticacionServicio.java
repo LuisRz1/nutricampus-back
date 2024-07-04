@@ -64,7 +64,7 @@ public class AutenticacionServicio {
                 "                ACTIVACIÓN DE CUENTA</h3>\n" +
                 "              <p style=\"text-align: center; font-size: 18px; color: #000;\">Se activó la cuenta correctamente.</p>\n" +
                 "              <div style=\"text-align: center; margin-top: 30px;\">\n" +
-                "                <a href=\"https://develop--nutricampus.netlify.app/login\"\n" + //Poner link del login del front en donde esta el "#"
+                "                <a href=\"https://angular-nutri-campus.vercel.app/login\"\n" + //Poner link del login del front en donde esta el "#"
                 "                  style=\"display: inline-block; padding: 12px 24px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px; font-size: 18px; font-weight: bold;\">\n" +
                 "                  Iniciar sesión\n" +
                 "                </a>\n" +
